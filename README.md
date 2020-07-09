@@ -2,7 +2,7 @@
 
 函数计算 & API 网关辅助库
 
-- [![Build Status](https://travis-ci.org/aliyun/fc-helper.svg?branch=master)](https://travis-ci.org/aliyun/fc-helper)
+- [![Build Status](https://travis-ci.org/ShadyZOZ/fc-helper.svg?branch=master)](https://travis-ci.org/ShadyZOZ/fc-helper)
 
 ## 原始形式
 
