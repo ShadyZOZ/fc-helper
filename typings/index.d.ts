@@ -74,7 +74,7 @@ interface Tester {
 type AsyncRequestFunc = (event: FCRAWRequestEvent, ctx: FCContext) => Promise<FCRAWResponse>;
 type AsyncEventFunc = (event: Buffer, ctx: FCContext) => Promise<any>;
 
-declare module "fc-helper" {
+declare module "@shadyzoz/fc-helper" {
     function hook(middleWare: FCMiddleWare)
     function test(middleWare: FCMiddleWare): Tester
     function asyncWrap(asyncRequestFunc: AsyncRequestFunc): any
