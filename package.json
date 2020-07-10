@@ -24,6 +24,10 @@
     "lib",
     "typings"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ShadyZOZ/fc-helper.git"
