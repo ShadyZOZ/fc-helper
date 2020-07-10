@@ -43,10 +43,21 @@ interface Functions {
     timeout?: number;      // Integer, in seconds.
 }
 
+interface Service {
+    name: string;
+    logProject: string;
+    logStore: string;
+    qualifier: string;
+    versionId: string;
+}
+
 interface FCContext {
     requestId?: string;
     credentials?: Credentials;
     "function"?: Functions;
+    service?: Service;
+    region: string;
+    accountId: string;
 }
 
 interface FCRAWRequestEvent {
