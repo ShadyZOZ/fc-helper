@@ -78,6 +78,7 @@ interface FCRAWResponse {
 }
 
 interface Tester {
+    mockFromConfig(serviceName: string, functionName: string, templatePath?: string): Tester
     run(event: FCRAWRequestEvent, ctx?: FCContext): Promise<FCRAWResponse>
     run(event: Buffer, ctx?: FCContext): Promise<any>
 }
