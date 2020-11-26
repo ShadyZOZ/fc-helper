@@ -78,7 +78,7 @@ declare module "@shadyzoz/fc-helper" {
     body?: string
   }
 
-  interface Tester {
+  interface FCTester {
     run(event: FCRAWRequestEvent, ctx?: FCContext): Promise<FCRAWResponse>
     run(event: Buffer, ctx?: FCContext): Promise<any>
   }
@@ -87,7 +87,7 @@ declare module "@shadyzoz/fc-helper" {
   type AsyncEventFunc = (event: Buffer, ctx: FCContext) => Promise<any>;
 
   function hook(middleWare: FCMiddleWare)
-  function test(middleWare: FCMiddleWare): Tester
+  function test(middleWare: FCMiddleWare): FCTester
   function asyncWrap(asyncRequestFunc: AsyncRequestFunc): any
   function asyncWrap(asyncEventFunc: AsyncEventFunc): any
 }
