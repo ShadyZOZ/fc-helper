@@ -1,6 +1,6 @@
 {
   "name": "@shadyzoz/fc-helper",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
@@ -10,8 +10,7 @@
   "typings": "typings/index.d.ts",
   "author": "ShadyZOZ",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^14.14.7",
     "coveralls": "^3.0.0",
