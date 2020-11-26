@@ -1,21 +1,19 @@
 {
   "name": "@shadyzoz/fc-helper",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "make lint",
     "test": "make test"
   },
   "typings": "typings/index.d.ts",
   "author": "ShadyZOZ",
   "license": "MIT",
   "dependencies": {
-    "fs-monkey": "^1.0.1",
-    "js-yaml": "^3.14.0",
-    "linkfs": "^2.1.0",
-    "unionfs": "^4.4.0"
   },
   "devDependencies": {
+    "@types/node": "^14.14.7",
     "coveralls": "^3.0.0",
     "eslint": "^4.19.1",
     "expect.js": "^0.3.1",
