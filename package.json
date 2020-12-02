@@ -1,6 +1,6 @@
 {
   "name": "@shadyzoz/fc-helper",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
