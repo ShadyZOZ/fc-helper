@@ -1,4 +1,4 @@
-'use strict';
+import { FCContext, ICredentials, IFunctions, IService } from './interface';
 
 const ORIGIN_EVENT = Symbol.for('ctx#origin_event');
 const EVENT = Symbol.for('ctx#event');
@@ -7,15 +7,15 @@ const PARSED_EVENT = Symbol.for('ctx#parsed_body');
 const BODY_PARSED = Symbol.for('ctx#body_parsed');
 const BODY = Symbol.for('ctx#body');
 
-class Request {
-  constructor(event) {
+export class Request {
+  constructor(event: Buffer) {
     this[ORIGIN_EVENT] = event;
     this[PARSED_EVENT] = null;
   }
 
   get [EVENT]() {
     if (!this[EVENT_PARSED]) {
-      this[EVENT_PARSED] = JSON.parse(this[ORIGIN_EVENT]);
+      this[EVENT_PARSED] = JSON.parse(this[ORIGIN_EVENT].toString());
       this[ORIGIN_EVENT] = null;
     }
 
@@ -57,6 +57,11 @@ class Request {
 }
 
 class Response {
+  statusCode: number;
+  headers: Record<string, string>;
+  typeSetted: boolean;
+  body: any;
+
   constructor() {
     this.statusCode = 200;
     this.headers = {};
@@ -65,8 +70,17 @@ class Response {
   }
 }
 
-class Context {
-  constructor(event, context) {
+export class Context {
+  req: Request;
+  res: Response;
+  requestId?: string;
+  credentials?: ICredentials;
+  function?: IFunctions;
+  service?: IService;
+  region?: string;
+  accountId?: string;
+
+  constructor(event: Buffer, context: FCContext) {
     this.req = new Request(event);
     this.res = new Response();
     this.requestId = context.requestId;
@@ -98,7 +112,7 @@ class Context {
     return this.req.params;
   }
 
-  get(key) {
+  get(key: string) {
     return this.headers[key];
   }
 
@@ -128,9 +142,7 @@ class Context {
     return this.res.statusCode;
   }
 
-  set(key, value) {
+  set(key: string, value: string) {
     this.res.headers[key] = value;
   }
 }
-
-module.exports = Context;

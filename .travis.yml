@@ -1,7 +1,13 @@
+sudo: false
 language: node_js
-
 node_js:
-  - "8"
-
+  - '8'
+  - '10'
+  - '12'
+  - '14'
+install:
+  - yarn
 script:
-  - 'make test-coveralls'
+  - npm run ci
+after_script:
+  - npx codecov

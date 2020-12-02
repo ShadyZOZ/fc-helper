@@ -1,11 +1,23 @@
-'use strict';
+import { Context } from './context';
+import { FCContext } from './interface';
 
-const Context = require('./context');
+type FCCallbackFn = (err: Error | null, response?: any) => void;
+type FCAsyncFnHandler = (event: Buffer, context: FCContext) => Promise<any>;
+type FCRequestHandler = (context: Context) => Promise<void>;
 
-function hook (handler) {
-  return function(event, context, callback) {
+// export type FCEventHandler = (event: Buffer, context: FCContext, callback: FCCallbackFn) => void;
+export interface FCEventHandler {
+  (event: Buffer, context: FCContext, callback: FCCallbackFn): void;
+}
+
+/**
+ * @deprecated 代码有点奇怪
+ * @param handler 类web controller式写法
+ */
+export function hook(handler: FCRequestHandler) {
+  return function (event: Buffer, context: FCContext, callback: FCCallbackFn) {
     if (handler.constructor.name !== 'AsyncFunction') {
-      var err = new TypeError('Must be an AsyncFunction');
+      const err = new TypeError('Must be an AsyncFunction');
       return callback(err);
     }
 
@@ -13,7 +25,7 @@ function hook (handler) {
 
     handler(ctx).then(() => {
       const data = ctx.body;
-      var encoded = false;
+      let encoded = false;
       if (typeof data === 'string') {
         if (!ctx.type) {
           ctx.type = 'text/plain';
@@ -36,7 +48,7 @@ function hook (handler) {
         isBase64Encoded: encoded,
         statusCode: ctx.status,
         headers: ctx.res.headers,
-        body: ctx.body
+        body: ctx.body,
       };
     }).then((response) => {
       callback(null, response);
@@ -46,17 +58,16 @@ function hook (handler) {
   };
 }
 
-class Tester {
-  constructor(handler) {
+export class Tester {
+  protected handler: FCEventHandler;
+
+  constructor(handler: FCEventHandler) {
     this.handler = handler;
   }
 
-  run(event, context) {
-    if (!context) {
-      context = {};
-    }
+  run(event: Buffer, context: FCContext = {}): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.handler(event, context, function (err, result) {
+      this.handler(event, context, (err, result) => {
         if (err) {
           return reject(err);
         }
@@ -66,14 +77,14 @@ class Tester {
   }
 }
 
-function test(handler) {
+export function test(handler: FCEventHandler) {
   return new Tester(handler);
 }
 
-function asyncWrap(asyncCall) {
-  return function (event, context, callback) {
+export function asyncWrap(asyncCall: FCAsyncFnHandler) {
+  return function (event: Buffer, context: FCContext, callback: FCCallbackFn) {
     if (asyncCall.constructor.name !== 'AsyncFunction') {
-      var err = new TypeError('Must be an AsyncFunction');
+      const err = new TypeError('Must be an AsyncFunction');
       return callback(err);
     }
 
@@ -85,9 +96,4 @@ function asyncWrap(asyncCall) {
   };
 }
 
-module.exports = {
-  asyncWrap,
-  hook,
-  test,
-  Tester,
-};
+export { FCContext };
