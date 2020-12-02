@@ -2,7 +2,8 @@
 
 函数计算 & API 网关辅助库
 
-- [![Build Status](https://travis-ci.org/ShadyZOZ/fc-helper.svg?branch=master)](https://travis-ci.org/ShadyZOZ/fc-helper)
+[![Build Status](https://travis-ci.org/ShadyZOZ/fc-helper.svg?branch=master)](https://travis-ci.org/ShadyZOZ/fc-helper)
+[![codecov](https://codecov.io/gh/ShadyZOZ/fc-helper/branch/master/graph/badge.svg?token=E13G1T1K7A)](https://codecov.io/gh/ShadyZOZ/fc-helper)
 
 ## 原始形式
 
