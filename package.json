@@ -1,6 +1,6 @@
 {
   "name": "@shadyzoz/fc-helper",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "函数计算 & API 网关辅助库",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "test": "egg-bin test --ts",
     "cov": "egg-bin cov --ts",
     "ci": "npm run lint && npm run cov",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "rm -rf lib/ && npm run build"
   },
   "author": "ShadyZOZ",
   "license": "MIT",
